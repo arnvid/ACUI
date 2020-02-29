@@ -1,0 +1,7 @@
+myAddOns: enabled
+myReloadUI: enabled
+MozzFullWorldMap: enabled
+EZoneLevel: enabled
+bc_AutoMailSubject: enabled
+Reputation: enabled
+MapCoords: enabled

@@ -1,0 +1,61 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="EZoneLevel.lua"/>
+	<Frame name="EZoneLevel_Base" frameStrata="HIGH" toplevel="true" movable="true" parent="UIParent">
+		<Size><AbsDimension x="32" y="32"/></Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="MinimapCluster">
+				<Offset><AbsDimension x="26" y="3"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+						<Layer level="ARTWORK">
+				<Texture name="EZoneLevel_Grey" file="Interface\AddOns\EZoneLevel\EZonelevel_Grey.tga"/>
+				<Texture name="EZoneLevel_Green" file="Interface\AddOns\EZoneLevel\EZonelevel_Green.tga"/>
+				<Texture name="EZoneLevel_Yellow" file="Interface\AddOns\EZoneLevel\EZonelevel_Yellow.tga"/>
+				<Texture name="EZoneLevel_Red" file="Interface\AddOns\EZoneLevel\EZonelevel_Red.tga"/>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="EZoneLevel_Button">
+				<Size>
+					<AbsDimension x="32" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-9"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="EZoneLevel_Text" inherits="GameFontNormal" wraponspaces="true">
+							<Size>
+								<AbsDimension x="128" y="12"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						EZoneLevel_OnEnter();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+		  <OnLoad>
+		      EZoneLevel_OnLoad();
+		  </OnLoad>
+		  <OnEvent>
+		      EZoneLevel_OnEvent();
+		  </OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

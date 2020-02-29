@@ -1,0 +1,85 @@
+-- *******************************************************
+-- 
+-- ~ ScaleIt ++ MoveIt ++ HideIt ++ OpenIt == SiMiHiOi ~
+-- 
+-- What is it?
+-- 	It allows permanent up or downscaling of the UI without
+-- 	having to potch around in the Interface options.  It's
+--    also for the scaling, moving and hiding of individual
+--    interface elements.
+--   
+-- Why?
+-- 	Simply because Blizzard didn't properly implement it,
+-- 	it's nicer to have a slash command and upscaling is
+-- 	wholly NOT possible through the Interface options, as
+-- 	of now as far as I know, it can only be done via a
+-- 	Macro.  I find this unacceptable, this is my solution.
+--   
+-- How?
+-- 	Global scaling: /scaleit scale <value> where <value>
+--		is anything from 0.5 to 2.0, I list those as sane
+--		(safe) values which I have tested.  I've noticed that
+--		this AddOn doesn't play nicely as an 'update', it
+--		won't let the user set manual scales and it can spit
+--		errors if something else tries to scale or use
+--		scaling math, so instead I've set it to only run on
+--		UI startup, otherwise it automatically triggers an
+--		instance of ReloadUI().  That way it plays nicely
+--		with manual scales and any AddOns that might make
+--		use of scaling arithmetic.
+--
+--		Individual scaling: /scaleit <value> <option>, just
+--		enter in scaleit for the lowdown.  The rules of global
+--		scaling apply here too.  Sane values are 0.5 to 2.0
+--		but you can try just about anything.
+--
+--		Individual moving: /moveit <value> <x or y>, as with
+--		scaleit, it's just a matter of using /moveit to see
+--		what's available.  This provides a by-pixel granular
+--		accurate positioning system for many GUI elements
+--		where X is vertical and Y is horizontal.
+--
+--		Individual hiding: /hideit <value> is a toggle, use
+--		just /hideit to see what's available.
+--
+-- Caveats ...
+-- 	Yes, there are some.  For my own reasons I haven't
+-- 	placed in any safety checks, I won't patronize you,
+-- 	you aren't dumb.  If you were, you wouldn't be
+-- 	reading this, eh?  Thusly, you could scale 10.0
+-- 	and this would be bad, very bad.  It would cause
+-- 	the game to crash every time you load it.  Thusly
+-- 	I cite here and for the record that sane values are
+-- 	0.5 to 2.0 and those are the only ones you should
+-- 	use.  Thems the breaks, literally.
+-- 
+-- Who?
+-- 	Rowne.  I'm just this hard of sight Tauren, yanno?
+--		Furthermore, I've received lots of aid.  I used
+--		Kortalh's TalentReminder AddOn (which I honestly
+--		recommend to anyone who even considers playing
+--		World of Warcraft), Iriel and Mondinga who provided
+--		me with the correct CVar.  In honesty, they did the
+--		most work, one by providing me with the line of
+--		code I need, the other by providing a well written
+--		and documented AddOn.  All I did was patch the
+--		relevant aspects together.
+--
+--		Fixes credits: Malvasius for the XP bar fix.
+--
+--		Contributor Credits: Mook for ... lots of things.
+--		Look for the 'Added by Mook' section below to
+--		see exactly what he's added.  Want your name in
+--		here too?  Contribute stuff!  It's easier than
+--		ya think and I'd love to see this become more of
+--		a widespread community tool than just an average
+--		AddOn, wot?
+--
+--		I borrowed Jooky's 'get player name' code too so
+--		he gets contributor credits and major kudos for
+--		making the only 'get player name' code I could
+--		actually get to work for me.  His code makes so
+--		much sense, it's so clean, organized and well
+--		commented.  Jooky is a coding God, PRAISE HIM!
+-- 
+-- *******************************************************

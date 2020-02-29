@@ -1,0 +1,6 @@
+## Interface: 4216
+## Title: Average Exp Calculator
+## Author: Jinx
+## Notes: Calculates Average Exp Gain - Version 0.421b
+## SavedVariables: jx_avgxp_players,jx_avgxp_globalinit
+AvgXP.xml

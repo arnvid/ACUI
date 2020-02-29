@@ -1,0 +1,18 @@
+## Interface: 1300
+## Title: myAddOns
+## Title-deDE: myAddOns
+## Title-enUS: myAddOns
+## Title-frFR: myAddOns
+## Notes: An AddOns menu added to the Main Menu
+## Notes-deDE: Ein zum Optionsmenü hinzugefügtes AddOnsmenü
+## Notes-enUS: An AddOns menu added to the Main Menu
+## Notes-frFR: Un menu AddOns ajouté au Menu Principal
+## Version: 1.2
+## Author: Scheid
+## Dependencies:
+## OptionalDeps:
+## SavedVariables: myAddOnsList
+## DefaultState: enabled
+myGameMenuButtonAddOns.xml
+myAddOnsFrame.xml
+

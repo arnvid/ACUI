@@ -1,0 +1,6 @@
+## Interface: 1300
+## Title: UberActions 
+## Notes: Lets you inspect all ActionButtons, Option to set count for spells with reagents, Option to lock ActionButtons so they don't get pulled off accidentally. Option to update ActionButtons with higher ranked spells when you buy them automatically. (Bind key to open config window)
+## Author: Marc aka Saien on Hyjal
+## SavedVariables: UberActions_Config
+UberActions.xml

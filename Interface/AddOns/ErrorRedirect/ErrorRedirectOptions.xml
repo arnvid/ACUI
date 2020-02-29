@@ -1,0 +1,213 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+  <Frame name="ErrorRedirectOptionsFrame" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" parent="UIParent" enableKeyboard="true">
+    <Size>
+      <AbsDimension x="380" y="190"/>
+    </Size>
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="11" right="12" top="12" bottom="11"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="32"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer level="ARTWORK">
+        <Texture name="ErrorRedirectOptionsFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+          <Size>
+            <AbsDimension x="390" y="64"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOP">
+              <Offset>
+                <AbsDimension x="0" y="12"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+        <FontString name="ErrorRedirectOptionsFrameTitle" inherits="GameFontNormal">
+          <Anchors>
+            <Anchor point="TOP" relativeTo="ErrorRedirectOptionsFrameHeader">
+              <Offset>
+                <AbsDimension x="0" y="-14"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+			<Frame name="ErrorRedirectOptionsFrameCombo" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="71" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentText" inherits="GameFontNormal" text="Filter:" justifyH="LEFT">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-6"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+      <CheckButton name="ErrorRedirectOptionsFrameHighlight" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="ErrorRedirectOptionsFrameCombo" relativePoint="BOTTOMLEFT">
+            <Offset>
+              <AbsDimension x="-30" y="-5"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>^
+      <CheckButton name="ErrorRedirectOptionsFrameSuppress" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="ErrorRedirectOptionsFrameHighlight" relativePoint="BOTTOMLEFT">
+            <Offset>
+              <AbsDimension x="0" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </CheckButton>
+      <Button name="ErrorRedirectOptionsFrameOkay" inherits="OptionsButtonTemplate" text="Okay">
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-20" y="16"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            ErrorRedirect_HasUserPressedOkay = true;
+
+            if ErrorRedirectOptionsFrameHighlight:GetChecked() then
+              ErrorRedirect_HighlightMessages = true;
+            else
+              ErrorRedirect_HighlightMessages = false;
+            end
+
+            if ErrorRedirectOptionsFrameSuppress:GetChecked() then
+              ErrorRedirect_SuppressModErrors = true;
+            else
+              ErrorRedirect_SuppressModErrors = false;
+            end
+
+            PlaySound("gsTitleOptionOK");
+            HideUIPanel(ErrorRedirectOptionsFrame);
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        UIPanelWindows["ErrorRedirectOptionsFrame"] = {area = "center", pushable = 0};
+
+        ErrorRedirectOptionsFrameHighlightText:SetTextHeight(12);
+        ErrorRedirectOptionsFrameSuppressText:SetTextHeight(12);
+
+        if GetLocale() == "deDE" then
+          ERRORREDIRECT_COMBOTEXT = { "Deaktivert", "Aktiviert, keine Umleitung", "Aktiviert, Umleitung ins Kampflog" };
+          ErrorRedirectOptionsFrameTitle:SetText("Umleitung Fehlernachricht");
+          ErrorRedirectOptionsFrameHighlightText:SetText("Eigene Farben f\195\188r Nachrichten aktivieren");
+          ErrorRedirectOptionsFrameSuppressText:SetText("Programmfehler umleiten (nil values, etc.)");
+        else
+          ERRORREDIRECT_COMBOTEXT = { "Disable", "Enable, no redirect", "Enable, redirect to combat log" };
+          ErrorRedirectOptionsFrameTitle:SetText("Error Redirect");
+          ErrorRedirectOptionsFrameHighlightText:SetText("Enable individual message color");
+          ErrorRedirectOptionsFrameSuppressText:SetText("Redirect mod program errors (nil values, etc.)");
+        end
+
+        UIDropDownMenu_Initialize(ErrorRedirectOptionsFrameCombo, function()
+          local info1 = { text = ERRORREDIRECT_COMBOTEXT[1],
+                          value = 1,
+                          func = function()
+                            ErrorRedirect_IsEnabled = false;
+                            ErrorRedirect_ShowInCombatLog = false;
+                            UIDropDownMenu_SetSelectedValue(ErrorRedirectOptionsFrameCombo, 1);
+                          end }
+
+          local info2 = { text = ERRORREDIRECT_COMBOTEXT[2],
+                          value = 2,
+                          func = function()
+                            ErrorRedirect_IsEnabled = true;
+                            ErrorRedirect_ShowInCombatLog = false;
+                            UIDropDownMenu_SetSelectedValue(ErrorRedirectOptionsFrameCombo, 2);
+                          end }
+
+          local info3 = { text = ERRORREDIRECT_COMBOTEXT[3],
+                          value = 3,
+                          func = function()
+                            ErrorRedirect_IsEnabled = true;
+                            ErrorRedirect_ShowInCombatLog = true;
+                            UIDropDownMenu_SetSelectedValue(ErrorRedirectOptionsFrameCombo, 3);
+                          end }
+
+          UIDropDownMenu_AddButton(info1);
+          UIDropDownMenu_AddButton(info2);
+          UIDropDownMenu_AddButton(info3);
+        end);
+        UIDropDownMenu_SetWidth(200, ErrorRedirectOptionsFrameCombo);
+        ErrorRedirectOptionsFrameComboText:ClearAllPoints();
+        ErrorRedirectOptionsFrameComboText:SetPoint("LEFT", "ErrorRedirectOptionsFrameCombo", "LEFT", 25, 3);
+        ErrorRedirectOptionsFrameComboText:SetJustifyH("LEFT");
+
+      </OnLoad>
+      <OnShow>
+        local currentConfig = 0;
+        if ErrorRedirect_IsEnabled and ErrorRedirect_ShowInCombatLog then
+          currentConfig = 3;
+        elseif ErrorRedirect_IsEnabled then
+          currentConfig = 2;
+        else
+          currentConfig = 1;
+        end
+        UIDropDownMenu_SetSelectedValue(ErrorRedirectOptionsFrameCombo, currentConfig);
+        UIDropDownMenu_SetText(ERRORREDIRECT_COMBOTEXT[currentConfig], ErrorRedirectOptionsFrameCombo);
+
+        if ErrorRedirect_HighlightMessages then
+          ErrorRedirectOptionsFrameHighlight:SetChecked(1);
+        else
+          ErrorRedirectOptionsFrameHighlight:SetChecked(0);
+        end
+
+        if ErrorRedirect_SuppressModErrors then
+          ErrorRedirectOptionsFrameSuppress:SetChecked(1);
+        else
+          ErrorRedirectOptionsFrameSuppress:SetChecked(0);
+        end
+
+        ErrorRedirect_HasUserPressedOkay = false;
+        ErrorRedirect_Backup_HighlightMessages = ErrorRedirect_HighlightMessages;
+        ErrorRedirect_Backup_IsEnabled = ErrorRedirect_IsEnabled;
+        ErrorRedirect_Backup_ShowInCombatLog = ErrorRedirect_ShowInCombatLog;
+        ErrorRedirect_Backup_SuppressModErrors = ErrorRedirect_SuppressModErrors;
+      </OnShow>
+      <OnHide>
+        if not ErrorRedirect_HasUserPressedOkay then
+          ErrorRedirect_HighlightMessages = ErrorRedirect_Backup_HighlightMessages;
+          ErrorRedirect_IsEnabled = ErrorRedirect_Backup_IsEnabled;
+          ErrorRedirect_ShowInCombatLog = ErrorRedirect_Backup_ShowInCombatLog;
+          ErrorRedirect_SuppressModErrors = ErrorRedirect_Backup_SuppressModErrors;
+        end
+        if(MYADDONS_ACTIVE_OPTIONSFRAME == this) then
+          ShowUIPanel(myAddOnsFrame);
+        end
+      </OnHide>
+    </Scripts>
+  </Frame>
+</Ui>

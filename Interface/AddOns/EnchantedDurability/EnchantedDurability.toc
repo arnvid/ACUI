@@ -1,0 +1,7 @@
+## Interface: 4150
+## Title:Enchanted Durability by Goatus v1.0
+## Notes:Replaces orginal Durability frame with new movable one. Additionaly shows some info on mouseover (item name / curent durability / repair cost)
+## OptionalDeps:
+## Dependencies:
+## SavedVariables: ed_var
+EnchantedDurability.xml

@@ -1,0 +1,14 @@
+## Interface: 1300
+## Title: BibWindowMods
+## Notes: Part of BibMod 3
+## Author: Ian Bibby
+## Dependencies: BibCore
+## OptionalDeps: BibToolbars
+BibWindowModControls.xml
+BibWindowModTemplates.xml
+BibToolbarMods.xml
+BibMiscWindowMods.xml
+BibLeftSideWindowMods.xml
+BibBuffFrameMods.xml
+## BibBagMods.xml
+BibTooltipMods.xml

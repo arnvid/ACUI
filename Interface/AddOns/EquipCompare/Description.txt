@@ -1,0 +1,62 @@
+EquipCompare 2.6.2 by Legorol
+Official web page: http://www.curse-gaming.com/mod.php?addid=308
+
+Description:
+========
+In WoW when you shop for items at a merchant and you hover over an item, you get a comparison tooltip showing the "currently equipped" item too. This AddOn adds such a feature everywhere in the game where you can hover over items, such as in your bags, in the loot window or on the reward page of a quest. You also receive comparison tooltips when clicking an item link in the chat box.
+
+Note: Due to the very complex nature of how Tooltips and Tooltip modifying AddOns work, it is possible that EquipCompare conflicts with other AddOns, especially if you have many of them installed. If you notice such a behaviour, please leave a comment on the AddOn's web page and I will investigate the issue. If it is found to be EquipCompare's fault, I will get on a fix. In many cases I can include a work-around even if it's another AddOn's fault.
+
+Install:
+-------
+Simply unzip the file into your WoW directory. This is a standalone, pure AddOn.
+
+Uninstall:
+---------
+Delete the "World of Warcraft\Interface\AddOns\EquipCompare" directory.
+
+Usage:
+-----
+The AddOn is enabled by default. Type "/equipcompare help" for usage information.
+
+To toggle whether it's on or off, simply type "/equipcompare". To turn it on "/equipcompare on". To turn it off, "/equipcompare off". You can use "/eqc" instead of "/equipcompare". The AddOn remembers the last setting which is per account. 
+
+*Experimental* Type "/eqc control" to toggle the Control key mode. In this mode, comparison tooltips are only shown if you hold down the Control key. This mode is unsupported at the moment and is here for your convenience. Use it at your own risk.
+
+*TIP* For some really advanced uses, turn on the experimental Control key mode and install CharactersViewer. Choose an alternate character in CV, go to the Auction House then hover over an item. First you get comparison with your equipped item, but then hold Control to get comparison with your alternate character. Shop with ease both for yourself and your other characters with this great feature!
+
+
+Optional Dependencies:
+================
+Cosmos:
+------
+If Cosmos is installed, EquipCompare can be toggled on and off via the Cosmos configuration menu.
+
+Lootlink:
+--------
+If LootLink is installed, you will receive the comparison tooltips when hovering over items in the LootLink database.
+
+CharactersViewer:
+----------------
+Flisher, the author of CharactersViewer, and I worked very hard together to bring you some special features if you have both of our AddOns installed.
+
+If CharactersViewer (version 29 or higher) is installed, EquipCompare now shows comparison tooltips with the items of the character you have selected in CV, instead of with the currently equipped items. Use this great feature to easily compare your equipment or inventory with your alts. Alternatively, do things like receive relevant shopping tooltips at the Auction House, when you are shopping for your alt. 
+
+
+Known Issues:
+============
+* Hovering over your equipped items in any place other than your Character window causes comparison tooltips to appear. This affects for example trinkets dragged on to the hotbar.
+* Main/Off Hand item both gets displayed in situations when a lot of players feel they shouldn't be (This works as intended at the moment).
+* If you view an Off Hand item when you have a 2H item equipped, you don't get comparison with the equipped 2H item. (This works as intended at the moment).
+* Tooltip placement scheme is still not the best.
+* If both comparison tooltips are getting displayed and they are very wide (e.g. German client), it is possible that they don't both fit on the screen. In this case, part of one might get cut off.
+* Usage and Cosmos texts are not localized to German and French. Nevertheless, the AddOn runs fine on German and French clients.
+
+
+Thanks goes to:
+==============
+* Curse Gaming for hosting the AddOn and for placing it in the Featured AddOn location at least twice.
+* Woofiest for the support and great AddOn pack.
+* Flisher for the fruitful collaboration.
+* beWRage for French localization.
+* Maischter for German localization.

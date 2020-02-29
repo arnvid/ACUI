@@ -1,0 +1,102 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+
+	<Button name="BibToolbarResizer" virtual="true" inherits="BibResizerTemplate">
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT">
+				<Offset><AbsDimension x="7" y="-7"/></Offset>
+			</Anchor>
+		</Anchors>	
+		<Scripts>
+			<OnLoad>
+				local BibToolbar = this:GetParent();
+				if(BibToolbar ~= nil) then
+					this:RegisterEvent("UNIT_NAME_UPDATE");
+					if(not getglobal(this:GetName().."Scale")) then
+						setglobal(this:GetName().."Scale", {});
+					end
+					RegisterForSave(this:GetName().."Scale");
+					BibResizerList[BibResizerListSize] = this;
+					BibResizerListSize = BibResizerListSize + 1;
+				end
+			</OnLoad>
+		</Scripts>
+	</Button>
+	
+	<Button name="BibActionBar1Resizer" inherits="BibToolbarResizer" parent="BibActionBar1"/>
+	<Button name="BibActionBar2Resizer" inherits="BibToolbarResizer" parent="BibActionBar2"/>
+	<Button name="BibActionBar3Resizer" inherits="BibToolbarResizer" parent="BibActionBar3"/>
+	<Button name="BibActionBar4Resizer" inherits="BibToolbarResizer" parent="BibActionBar4"/>
+	<Button name="BibActionBar5Resizer" inherits="BibToolbarResizer" parent="BibActionBar5"/>
+	<Button name="BibActionBar6Resizer" inherits="BibToolbarResizer" parent="BibActionBar6"/>
+	<Button name="BibActionBar7Resizer" inherits="BibToolbarResizer" parent="BibActionBar7"/>
+	<Button name="BibBagButtonsBarResizer" inherits="BibToolbarResizer" parent="BibBagButtonsBar"/>
+
+	<Button name="BibMenuResizer" inherits="BibToolbarResizer" hidden="true" parent="BibMenu">
+		<Scripts>
+			<OnLoad>
+				local BibToolbar = this:GetParent();
+				if(BibMenuDragButton ~= nil) then
+					this:RegisterEvent("UNIT_NAME_UPDATE");
+					if(not getglobal(this:GetName().."Scale")) then
+						setglobal(this:GetName().."Scale", {});
+					end
+					RegisterForSave(this:GetName().."Scale");
+					BibResizerList[BibResizerListSize] = this;
+					BibResizerListSize = BibResizerListSize + 1;
+				end
+			</OnLoad>
+		</Scripts>
+	</Button>
+
+	<Button name="BibPetActionBarFrameResizer" frameStrata="DIALOG" inherits="BibToolbarResizer" hidden="true" parent="PetActionBarFrame">
+		<Scripts>
+			<OnLoad>
+				local BibToolbar = this:GetParent();
+				if(BibPetActionBarDragButton ~= nil) then
+					this:RegisterEvent("UNIT_NAME_UPDATE");
+					if(not getglobal(this:GetName().."Scale")) then
+						setglobal(this:GetName().."Scale", {});
+					end
+					RegisterForSave(this:GetName().."Scale");
+					BibResizerList[BibResizerListSize] = this;
+					BibResizerListSize = BibResizerListSize + 1;
+				end
+			</OnLoad>
+		</Scripts>
+	</Button>
+
+	<Button name="BibShapeshiftBarFrameResizer" inherits="BibToolbarResizer" hidden="true" parent="ShapeshiftBarFrame">
+		<Scripts>
+			<OnLoad>
+				local BibToolbar = this:GetParent();
+				if(BibShapeshiftActionBarDragButton ~= nil) then
+					this:RegisterEvent("UNIT_NAME_UPDATE");
+					if(not getglobal(this:GetName().."Scale")) then
+						setglobal(this:GetName().."Scale", {});
+					end
+					RegisterForSave(this:GetName().."Scale");
+					BibResizerList[BibResizerListSize] = this;
+					BibResizerListSize = BibResizerListSize + 1;
+				end
+			</OnLoad>
+		</Scripts>
+	</Button>
+	
+	<Button name="BibMicroBarResizer" inherits="BibToolbarResizer" frameLevel="5" hidden="true" parent="MainMenuBarArtFrame">
+		<Scripts>
+			<OnLoad>
+				local BibToolbar = this:GetParent();
+				if(BibMicroBarDragButton ~= nil) then
+					this:RegisterEvent("UNIT_NAME_UPDATE");
+					if(not getglobal(this:GetName().."Scale")) then
+						setglobal(this:GetName().."Scale", {});
+					end
+					RegisterForSave(this:GetName().."Scale");
+					BibResizerList[BibResizerListSize] = this;
+					BibResizerListSize = BibResizerListSize + 1;
+				end
+			</OnLoad>
+		</Scripts>
+	</Button>
+</Ui>

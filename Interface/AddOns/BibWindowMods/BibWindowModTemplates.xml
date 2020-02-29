@@ -1,0 +1,109 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="BibWindowModTemplates.lua"/>
+	
+	<Button name="BibDragBarTemplate" virtual="true" frameLevel="5">
+		<Scripts>
+			<OnLoad>
+				this:GetParent():SetMovable(true);
+			</OnLoad>
+			<OnMouseDown>
+				this:GetParent():StartMoving();
+			</OnMouseDown>
+			<OnMouseUp>
+				this:GetParent():StopMovingOrSizing();
+			</OnMouseUp>
+		</Scripts>
+	</Button>
+	
+	<Button name="BibResizerTemplate" virtual="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="16" y="16"/>
+		</Size>
+		<Layers><Layer><Texture file="Interface\AddOns\BibWindowMods\BibResizeTab"/></Layer></Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("UNIT_NAME_UPDATE");
+				if(not getglobal(this:GetName().."Scale")) then
+					setglobal(this:GetName().."Scale", {});
+				end
+				RegisterForSave(this:GetName().."Scale");
+				BibResizerList[BibResizerListSize] = this;
+				BibResizerListSize = BibResizerListSize + 1;
+			</OnLoad>
+			<OnEvent>
+				if(EventIsPlayerNameLoaded(event)) then
+					local PlayerString = UnitName("player");
+					local parent = this:GetParent();
+					local loadedscale = getglobal(this:GetName().."Scale")[PlayerString];
+					if(loadedscale ~= nil) then
+						parent:SetScale(loadedscale);
+					end
+					this.lastscale = parent:GetScale();
+				end
+			</OnEvent>
+			<OnMouseDown>
+				local parent = this:GetParent();
+				adjustedWidth = parent:GetScale() * parent:GetWidth();
+				adjustedHeight = parent:GetScale() * parent:GetHeight();
+				this.anchorX = parent:GetScale() * parent:GetLeft();
+				this.anchorY = parent:GetScale() * parent:GetTop();
+				local cursorX, cursorY = GetCursorPosition();
+				this.startW = cursorX - this.anchorX;
+				this.startH = this.anchorY - cursorY;
+				this.startScale = parent:GetScale();
+				this.scaling = true;
+			</OnMouseDown>
+			<OnMouseUp>
+				this.scaling = false;
+				local parent = this:GetParent();
+				this:GetParent():StartMoving();
+				this:GetParent():StopMovingOrSizing();
+			</OnMouseUp>
+			<OnUpdate>
+				if(this.scaling == true) then
+					local parent = this:GetParent();
+					parent:Raise();
+					local cursorX, cursorY = GetCursorPosition();
+					local newW = cursorX-this.anchorX;
+					local newH = this.anchorY-cursorY;
+					local Xratio = newW / this.startW;
+					local Yratio = newH / this.startH;
+					local usedratio;
+					
+					if (Xratio > Yratio) then
+						usedratio = Xratio;
+					else
+						usedratio = Yratio;
+					end
+					
+					local newratio = this.startScale * usedratio;
+					if (newratio >= .4 and 2.5 >= newratio) then
+						local PlayerString = UnitName("player");
+						ScaleFrame(parent, this.anchorX, this.anchorY, newratio);
+						getglobal(this:GetName().."Scale")[PlayerString] = newratio;
+						this.lastscale = newratio;
+					end
+				else
+					local newscale = this:GetParent():GetScale();
+					if (this.lastscale ~= newscale and this.lastscale ~= nil) then
+						if (.00001 > math.abs(this.lastscale-newscale)) then
+							this.lastscale = newscale;
+						elseif (this:GetParent():IsUserPlaced()) then
+							local PlayerString = UnitName("player");
+							local parent = this:GetParent();
+							parent:SetScale(this.lastscale);
+							anchorX = parent:GetScale() * parent:GetLeft();
+							anchorY = parent:GetScale() * parent:GetTop();
+							this.lastscale = UIParent:GetScale();
+							ScaleFrame(parent, anchorX, anchorY, this.lastscale);
+							getglobal(this:GetName().."Scale")[PlayerString] = this.lastscale;
+						end
+					end
+				end
+			</OnUpdate>
+		</Scripts>
+	</Button>
+	
+	
+</Ui>

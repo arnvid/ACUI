@@ -1,0 +1,35 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<Script>
+			CHAT_FONT_HEIGHTS = {
+			[1] = 12,
+			[2] = 14,
+			[3] = 16,
+			[4] = 18,
+			[5] = 20,
+			[6] = 22,
+			[7] = 24,
+			[8] = 26,
+			[9] = 28,
+			[10] = 30
+		};
+	</Script>
+
+	<Script file="SiMiHiOi.lua"/>
+
+	<Frame name="Frame_ScaleIt" hidden="false">
+		<Scripts>
+			<OnLoad>
+				SiMiHiOi_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				SiMiHiOi_OnEvent(event);
+			</OnEvent>
+			<OnUpdate>
+				SiMiHiOi_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+
+</Ui>

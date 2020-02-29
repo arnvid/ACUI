@@ -1,0 +1,6 @@
+## Interface: 1300
+## Title: BCUI - Auto Mail Subject v1.07
+## Notes: Sets the subject of a mail message to the name of the attachment when it's added.  Remebers the last person you sent a message to.
+## OptionalDeps:
+## Dependencies: 
+bc_AutoMailSubject.xml

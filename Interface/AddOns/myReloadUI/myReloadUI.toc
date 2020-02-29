@@ -1,0 +1,16 @@
+## Interface: 1300
+## Title: myReloadUI
+## Title-deDE: myReloadUI
+## Title-enUS: myReloadUI
+## Title-frFR: myReloadUI
+## Notes: A ReloadUI button added to the Main Menu
+## Notes-deDE: Ein zum Optionsmenu hinzugefügter ReloadUI Knopf
+## Notes-enUS: A ReloadUI button added to the Main Menu
+## Notes-frFR: Un bouton ReloadUI ajouté au Menu Principal
+## Version: 1.1
+## Author: Scheid
+## Dependencies:
+## OptionalDeps: myAddOns
+## SavedVariables:
+## DefaultState: disabled
+myGameMenuButtonReloadUI.xml

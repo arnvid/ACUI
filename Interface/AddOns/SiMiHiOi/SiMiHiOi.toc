@@ -1,0 +1,6 @@
+## Interface: 4150
+## Title: SiMiHiOi!
+## Author: Rowne.  Contributors and Fixers ~ Mook, Malsavius, Iriel, Mondinger, Kortalh and Jooky.
+## Notes: A switch to allow permanent upscaling of World of Warcraft.
+## SavedVariables: SiMiHiOi_OneSizeFitsAll, ScaleSetting, ScaleIt, MoveIt, HideIt, OpenIt
+SiMiHiOi.xml

@@ -1,0 +1,4 @@
+## Interface: 4216
+## Title: MapCoords
+## Notes: Shows cursor & player coords on map
+MapCoords.xml

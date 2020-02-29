@@ -1,0 +1,7 @@
+## Interface: 1300
+## Author: Svarten
+## Title: MyInventory
+## Notes: Standalone, configurable inventory viewer.
+## SavedVariables: MyInventoryProfile
+MyInventory.xml
+MyInventory_Options.xml

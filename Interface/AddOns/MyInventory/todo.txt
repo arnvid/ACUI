@@ -1,0 +1,260 @@
+* Saving of inventory for offline viewing (maybe interface Characters Viewer)
+	-- Already have all the code from MII
+
+
+* Better visibility of seperate bags
+	-- Drawing borders around bags?
+	-- Showing border or no border?
+* Item Borders: Colors are weird
+
+
+
+
+* Mouse over real bag slots:
+	<!--
+	<Frame name="BagButtonMaskTemplate" enablemouse="true" virtual="true" hidden="false">
+		<Scripts>
+			<OnLoad>
+				MI_MainMenuBarBag_OnLoad();
+			</OnLoad>
+			<OnEnter>
+				MI_MainMenuBarBag_OnEnter();
+			</OnEnter>
+			<OnLeave>
+				MI_MainMenuBarBag_OnLeave();
+			</OnLeave>
+			<OnClick>
+				MI_MainMenuBarBag_OnClick();
+			</OnClick>
+			<OnDragStart>
+				MI_MainMenuBarBag_OnDrag();
+			</OnDragStart>
+			<OnReceiveDrag>
+				MI_MainMenuBarBag_OnDrop();
+			</OnReceiveDrag>
+		</Scripts>
+	</Frame>
+	<Frame name="MI_Bag_0" parent="MainMenuBarBackpackButton" inherits="BagButtonMaskTemplate" id="19" />
+	<Frame name="MI_Bag_1" parent="CharacterBag0Slot" inherits="BagButtonMaskTemplate" id="20" />
+	<Frame name="MI_Bag_2" parent="CharacterBag1Slot" inherits="BagButtonMaskTemplate" id="21" />
+	<Frame name="MI_Bag_3" parent="CharacterBag2Slot" inherits="BagButtonMaskTemplate" id="22" />
+	<Frame name="MI_Bag_4" parent="CharacterBag3Slot" inherits="BagButtonMaskTemplate" id="23" />
+	-->
+function MI_MainMenuBarBag_OnLoad()
+	if this:GetID()==19 then
+		this:SetAllPoints("MainMenuBarBackpackButton");
+	else
+		this:SetAllPoints("CharacterBag"..(this:GetID()-20).."Slot");
+	end
+end
+function MI_MainMenuBarBag_OnEnter()
+	MyInventory_HighlightBagItems(this:GetID()-19);
+	if this:GetID() == 19 then
+		GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+		GameTooltip:SetText(TEXT(BACKPACK_TOOLTIP),1.0,1.0,1.0);
+		local keyBinding = GetBindingKey("TOGGLEBACKPACK");
+		if ( keyBinding ) then
+		  GameTooltip:AppendText(" "..NORMAL_FONT_COLOR_CODE.."("..keyBinding..")"..FONT_COLOR_CODE_CLOSE);
+		end
+	else
+		BagSlotButton_OnEnter();
+
+	end
+end
+function MI_MainMenuBarBag_OnLeave()
+	MyInventory_HighlightBagItems(this:GetID()-19,1);
+	GameTooltip:Hide();
+end
+function MI_MainMenuBarBag_OnClick()
+	if id == 19 then
+		this = MainMenuBarBackpackButton;
+		if (IsShiftKeyDown() ) then
+			OpenAllBags();
+		else
+			BackpackButton_OnClick();
+		end
+	else
+		this = getglobal("CharacterBag"..(this:GetID()-20).."Slot");
+		if (IsShiftKeyDown() ) then
+			BagSlotButton_OnShiftClick();
+		else
+			BagSlotButton_OnClick();
+		end
+	end
+end
+function MI_MainMenuBarBag_OnDrag()
+	if id ~= 19 then
+		BagSlotButton_OnDrag();
+	end
+end
+function MI_MainMenuBarBag_OnDrop()
+	if id == 19 then
+		BackpackButton_OnClick();
+	else
+		this = getglobal("CharacterBag"..(this:GetID()-20).."Slot");
+		BagSlotButton_OnClick();
+	end
+end
+
+
+
+
+DONE: 
+
+* Order icons backwards
+
+* Bag Slot counting bug?? I don't see it
+* Don't take over Ammo Bags
+	-- Toggle each bag
+		-- Click bag button to toggle
+	-- store as "11111"
+
+
+
+function MyInventory_GetRowCol_FromID(id)
+	local row = 1+math.floor((id-1)/MyInventoryColumns);
+	local col = id - (row-1)*MyInventoryColumns;
+	return row, col;
+end
+function MyInventory_GetID_FromRowCol(row, col)
+	return (row-1)*MyInventoryColumns + col;
+end
+
+function MyInventory_GetFirstLastID_For_Bag(bag)
+	local slots = 0;
+	if not MyInventory_ShouldOverrideBag(bag) and GetContainerNumSlots(bag) > 0 then
+		return -1, -1;
+	end
+	for i=0, bag-1 do
+		if MyInventory_ShouldOverrideBag(i) then
+			slots = slots + GetContainerNumSlots(i);
+		end
+	end
+	local first = slots;
+	local last = slots + GetContainerNumSlots(bag);
+	return first+1, last;
+end
+function MI_DB()
+	MyInventory_DrawBorders();
+end
+function MyInventory_DrawBorders()
+	local vIndex=1;
+	local hIndex=1;
+	local fID, lID=0,0;
+	local fRow, fCol;
+	local lRow, lCol;
+	local line;
+	local id1, id2;
+	for i=0,4 do
+		if MyInventory_ShouldOverrideBag(i) and GetContainerNumSlots(i) > 0 then
+			MyInventory_DEBUG("Drawing border around bag "..i);
+			fID , lID = MyInventory_GetFirstLastID_For_Bag(i);
+			fRow, fCol= MyInventory_GetRowCol_FromID(fID);
+			lRow, lCol= MyInventory_GetRowCol_FromID(lID);
+			MyInventory_DEBUG("fID="..fID.." lID="..lID);
+			MyInventory_DEBUG("fRow="..fRow.." lRow="..lRow);
+			MyInventory_DEBUG("fCol="..fCol.." lCol="..lCol);
+			local fEnd;
+			if lRow==fRow then
+				fEnd = lCol;
+			else
+				fEnd= MyInventoryColumns;
+			end
+			id1=MyInventory_GetID_FromRowCol(fRow, fCol);
+			id2=MyInventory_GetID_FromRowCol(fRow, fEnd);
+			MI_DrawHLine(hIndex,id1,id2);
+			hIndex=hIndex+1;
+
+			--MyInventory_DEBUG("Drawing hline"..hIndex..":"..fRow.." "..fCol.."-"..fRow.." "..fEnd);
+			
+			if fCol==1 or fRow==lRow then --Only one vertical line
+				id1=MyInventory_GetID_FromRowCol(fRow, fCol);
+				id2=MyInventory_GetID_FromRowCol(lRow, fCol);
+				MI_DrawVLine(vIndex,id1,id2);
+				vIndex=vIndex+1;
+				--MyInventory_DEBUG("Drawing vline"..vIndex..":"..fRow.." "..fCol.."-"..lRow.." "..fCol);
+			else
+				id1=MyInventory_GetID_FromRowCol(fRow+1, 1);
+				id2=MyInventory_GetID_FromRowCol(fRow+1, fCol-1);
+				MI_DrawHLine(hIndex,id1,id2);
+				hIndex=hIndex+1;
+				--MyInventory_DEBUG("Drawing hline"..hIndex..":"..(fRow+1).." ".."1".."-"..(fRow+1).." "..(fCol-1));
+				id1=MyInventory_GetID_FromRowCol(fRow, fCol);
+				id2=MyInventory_GetID_FromRowCol(fRow, fCol);
+				MI_DrawVLine(vIndex,id1,id2);
+				vIndex=vIndex+1;
+				--MyInventory_DEBUG("Drawing vline"..vIndex..":"..fRow.." "..fCol.."-"..fRow.." "..fCol);
+				id1=MyInventory_GetID_FromRowCol(fRow+1, 1);
+				id2=MyInventory_GetID_FromRowCol(lRow, 1);
+				MI_DrawVLine(vIndex,id1,id2);
+				vIndex=vIndex+1;
+				--MyInventory_DEBUG("Drawing vline"..vIndex..":"..(fRow+1).." ".."1".."-"..lRow.." "..1);
+			end
+		end
+	end
+	MyInventory_DEBUG("----------------------------");
+	if fID ~= 0 and lID ~= 0 then -- Draw last lines
+		if lCol == MyInventoryColumns then -- Only have to draw two lines
+				id1=MyInventory_GetID_FromRowCol(lRow, 1);
+				id2=MyInventory_GetID_FromRowCol(lRow, lCol);
+				MI_DrawHLine(hIndex,id1,id2,1);
+				hIndex=hIndex+1;
+			--MyInventory_DEBUG("Drawing hline"..vIndex..":"..lRow.." ".."1".."-"..lRow.." "..lCol);
+				id1=MyInventory_GetID_FromRowCol(1, lCol);
+				id2=MyInventory_GetID_FromRowCol(lRow, lCol);
+				MI_DrawVLine(vIndex,id1,id2,1);
+				vIndex=vIndex+1;
+			--MyInventory_DEBUG("Drawing vline"..hIndex..":".."1".." "..lCol.."-"..lRow.." "..lCol);
+		else
+			id1=MyInventory_GetID_FromRowCol(lRow, 1);
+			id2=MyInventory_GetID_FromRowCol(lRow, lCol);
+			MI_DrawHLine(hIndex,id1,id2,1);
+			hIndex=hIndex+1;
+
+			fEnd= MyInventoryColumns;
+			id1=MyInventory_GetID_FromRowCol(lRow-1, lCol+1);
+			id2=MyInventory_GetID_FromRowCol(lRow-1, fEnd);
+			MI_DrawHLine(hIndex,id1,id2,1);
+			hIndex=hIndex+1;
+			--MyInventory_DEBUG("Drawing hline"..vIndex..":"..(lRow-1).." "..(lCol+1).."-"..(lRow-1).." "..fEnd) 
+			--MyInventory_DEBUG("Drawing hline"..vIndex..":"..lRow.." ".."1".."-"..lRow.." "..lCol);
+			id1=MyInventory_GetID_FromRowCol(1, fEnd);
+			id2=MyInventory_GetID_FromRowCol(lRow-1, fEnd);
+			MI_DrawVLine(vIndex,id1,id2,1);
+			vIndex=vIndex+1;
+			id1=MyInventory_GetID_FromRowCol(lRow, lCol);
+			id2=MyInventory_GetID_FromRowCol(lRow, lCol);
+			MI_DrawVLine(vIndex,id1,id2,1);
+			vIndex=vIndex+1;
+			--MyInventory_DEBUG("Drawing vline"..hIndex..":".."1".." "..lCol.."-"..lRow.." "..lCol);
+
+
+		end
+	end
+end
+function MI_DrawHLine(hIndex, id1, id2, bottom)
+	line = getglobal("MyInventoryHLine"..hIndex);
+	line:ClearAllPoints();
+	if bottom then
+		MyInventory_DEBUG("bottom:"..id1.." "..id2);
+		line:SetPoint("TOPLEFT", "MyInventoryFrameItem"..id1, "BOTTOMLEFT",-3,1);
+		line:SetPoint("TOPRIGHT", "MyInventoryFrameItem"..id2, "BOTTOMRIGHT",3,1);
+	else
+		line:SetPoint("TOPLEFT", "MyInventoryFrameItem"..id1, "TOPLEFT",-3,3);
+		line:SetPoint("TOPRIGHT", "MyInventoryFrameItem"..id2, "TOPRIGHT",3,3);
+	end
+	line:Show();
+end
+function MI_DrawVLine(vIndex, id1, id2, bottom)
+	line = getglobal("MyInventoryVLine"..vIndex);
+	line:ClearAllPoints();
+	if bottom then
+		MyInventory_DEBUG("right:"..id1.." "..id2);
+		line:SetPoint("TOPLEFT", "MyInventoryFrameItem"..id1, "TOPRIGHT",-3,3);
+		line:SetPoint("BOTTOMLEFT", "MyInventoryFrameItem"..id2, "BOTTOMRIGHT",-3,-3);
+	else
+		line:SetPoint("TOPLEFT", "MyInventoryFrameItem"..id1, "TOPLEFT",-3,3);
+		line:SetPoint("BOTTOMLEFT", "MyInventoryFrameItem"..id2, "BOTTOMLEFT",-3,-3);
+	end
+	line:Show();
+end

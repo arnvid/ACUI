@@ -1,0 +1,435 @@
+<!--
+	myAddOns v1.2
+-->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Include file="UIParent.lua"/>
+	<Script file="localization.lua"/>
+	<Script file="myAddOnsFrame.lua"/>
+	<Button name="myAddOnsFrameButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="310" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT" nonspacewrap="true">
+					<Size>
+						<AbsDimension x="225" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="15" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentVersion" inherits="GameFontNormal" justifyH="RIGHT" nonspacewrap="true">
+					<Size>
+						<AbsDimension x="60" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				myAddOnsFrame_OnClick();
+			</OnClick>
+			<OnEnter>
+				getglobal(this:GetName().."Name"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+				getglobal(this:GetName().."Version"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+			</OnEnter>
+			<OnLeave>
+				if (this:GetID() ~= myAddOnsFrame_GetSelectedLine()) then
+					getglobal(this:GetName().."Name"):SetTextColor(this.r, this.g, this.b);
+					getglobal(this:GetName().."Version"):SetTextColor(this.r, this.g, this.b);
+				end
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="-3" y="-1"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</NormalTexture>
+		<HighlightTexture name="$parentHighlight" file="" alphaMode="ADD">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="-3" y="-1"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</HighlightTexture>
+	</Button>
+	<Frame name="myAddOnsFrame" toplevel="true" parent="UIParent" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" enableKeyboard="true">
+		<Size>
+			<AbsDimension x="384" y="512"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\KeyBindingFrame\UI-KeyBindingFrame-TopLeft">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\KeyBindingFrame\UI-KeyBindingFrame-Top">
+					<Size>
+						<AbsDimension x="40" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="256" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\KeyBindingFrame\UI-KeyBindingFrame-TopRight">
+					<Size>
+						<AbsDimension x="128" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="40" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\KeyBindingFrame\UI-KeyBindingFrame-BotLeft">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\KeyBindingFrame\UI-KeyBindingFrame-Bot">
+					<Size>
+						<AbsDimension x="40" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="256" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\KeyBindingFrame\UI-KeyBindingFrame-BotRight">
+					<Size>
+						<AbsDimension x="128" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="40" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="myAddOnsFrameNameLabel" inherits="GameFontNormal" text="MYADDONS_LABEL_NAME">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="40" y="-32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="myAddOnsFrameVersionLabel" inherits="GameFontNormal" text="Version">
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="myAddOnsFrameNameLabel" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="206" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="myAddOnsFrameDescriptionText" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="51"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="myAddOnsFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="256" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" text="AddOns">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="myAddOnsFrameHeader">
+							<Offset>
+								<AbsDimension x="0" y="-14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="myAddOnsFrameButton1" inherits="myAddOnsFrameButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="26" y="-55"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton2" inherits="myAddOnsFrameButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton1" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton3" inherits="myAddOnsFrameButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton2" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton4" inherits="myAddOnsFrameButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton3" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton5" inherits="myAddOnsFrameButtonTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton4" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton6" inherits="myAddOnsFrameButtonTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton5" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton7" inherits="myAddOnsFrameButtonTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton6" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton8" inherits="myAddOnsFrameButtonTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton7" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton9" inherits="myAddOnsFrameButtonTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton8" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton10" inherits="myAddOnsFrameButtonTemplate" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton9" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton11" inherits="myAddOnsFrameButtonTemplate" id="11">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton10" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton12" inherits="myAddOnsFrameButtonTemplate" id="12">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton11" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton13" inherits="myAddOnsFrameButtonTemplate" id="13">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton12" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton14" inherits="myAddOnsFrameButtonTemplate" id="14">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton13" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton15" inherits="myAddOnsFrameButtonTemplate" id="15">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton14" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton16" inherits="myAddOnsFrameButtonTemplate" id="16">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton15" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton17" inherits="myAddOnsFrameButtonTemplate" id="17">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton16" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton18" inherits="myAddOnsFrameButtonTemplate" id="18">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton17" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton19" inherits="myAddOnsFrameButtonTemplate" id="19">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton18" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton20" inherits="myAddOnsFrameButtonTemplate" id="20">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton19" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton21" inherits="myAddOnsFrameButtonTemplate" id="21">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton20" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton22" inherits="myAddOnsFrameButtonTemplate" id="22">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton21" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton23" inherits="myAddOnsFrameButtonTemplate" id="23">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton22" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="myAddOnsFrameButton24" inherits="myAddOnsFrameButtonTemplate" id="24">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="myAddOnsFrameButton23" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Frame name="myAddOnsFrameHighlightFrame" hidden="true">
+				<Size>
+					<AbsDimension x="326" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="myAddOnsFrameHighlight" file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD">
+							<Size>
+								<AbsDimension x="326" y="16"/>
+							</Size>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<ScrollFrame name="myAddOnsFrameScrollFrame" inherits="FauxScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="344" y="390"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="-53"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(16, myAddOnsFrame_Update);
+					</OnVerticalScroll>
+					<OnMouseWheel>
+						ScrollFrameTemplate_OnMouseWheel(arg1);
+					</OnMouseWheel>
+				</Scripts>
+			</ScrollFrame>
+			<Button name="myAddOnsFrameRemoveButton" inherits="UIPanelButtonGrayTemplate" text="MYADDONS_BUTTON_REMOVE">
+				<Size>
+					<AbsDimension x="120" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="10" y="21"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						myAddOnsFrame_Remove();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="myAddOnsFrameOptionsButton" inherits="UIPanelButtonTemplate" text="MYADDONS_BUTTON_OPTIONS">
+				<Size>
+					<AbsDimension x="120" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="132" y="21"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igMainMenuOption");
+						myAddOnsFrame_ShowOptions();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="myAddOnsFrameOkayButton" inherits="UIPanelButtonTemplate" text="Okay">
+				<Size>
+					<AbsDimension x="120" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="21"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("gsTitleOptionOK");
+						HideUIPanel(myAddOnsFrame);
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				myAddOnsFrame_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				myAddOnsFrame_OnEvent();
+			</OnEvent>
+			<OnShow>
+				myAddOnsFrame_OnShow();
+			</OnShow>
+			<OnHide>
+				myAddOnsFrame_OnHide();
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

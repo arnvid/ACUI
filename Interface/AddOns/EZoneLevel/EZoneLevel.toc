@@ -1,0 +1,8 @@
+## Interface: 1300
+## Title: EZoneLevel
+## Author: Ezarra (icons by newtonma)
+## Notes: Adds a relative safety graphical indicator of mob levels in a zone /ezl for help
+## OptionalDeps: myAddOns
+## Dependencies: 
+## SavedVariables: ChatSpam
+EZoneLevel.xml

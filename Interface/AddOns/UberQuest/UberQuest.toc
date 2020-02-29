@@ -1,0 +1,6 @@
+## Interface: 1300
+## Title: UberQuest 
+## Notes: Dual pane quest list/log window with integrated Minion
+## Author: Marc aka Saien on Hyjal
+## SavedVariables: UberQuest_Config
+UberQuest.xml

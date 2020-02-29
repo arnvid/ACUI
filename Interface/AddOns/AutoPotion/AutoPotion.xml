@@ -1,0 +1,629 @@
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by bill (billcorp) -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="localization_en.lua"/>
+	<Script file="localization_de.lua"/>
+	<Script file="localization_fr.lua"/>
+	<Script file="AutoPotion.lua"/>
+	<!--Widget Templates-->
+	<Frame name="AutoPotion_Template_Dialog" parent="UIParent" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="false" virtual="true">
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER"/>
+		</Anchors>
+		<Size>
+			<AbsDimension x="256" y="384"/>
+		</Size>
+		<TitleRegion setAllPoints="true"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="AutoPotion_ConfigDg_Header" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="300" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" bgFile="Interface\DialogFrame\UI-DialogBox-Background" tile="true">
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+		</Backdrop>
+	</Frame>
+	<CheckButton name="AUTOPOTION_TEMPLATE_CHECKBT" enableMouse="true" virtual="true" text="">
+		<Size>
+			<AbsDimension x="24" y="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT"/>
+		</Anchors>
+		<NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+		<PushedTexture file="Interface\Buttons\UI-CheckBox-Down"/>
+		<DisabledTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+		<HighlightTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+		<NormalText inherits="GameFontNormalSmall" justifyH="LEFT">
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="RIGHT"/>
+			</Anchors>
+		</NormalText>
+		<HighlightText inherits="GameFontHighlightSmall" justifyH="LEFT">
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="RIGHT"/>
+			</Anchors>
+		</HighlightText>
+		<DisabledText inherits="GameFontDisableSmall" justifyH="LEFT">
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="RIGHT"/>
+			</Anchors>
+		</DisabledText>
+		<PushedTextOffset>
+			<AbsDimension x="2" y="-2"/>
+		</PushedTextOffset>
+		<CheckedTexture file="Interface\Buttons\UI-CheckBox-Check"/>
+		<DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled"/>
+		<Scripts>
+			<OnShow>this:SetText(getglobal(this:GetName().."_LABEL"));
+this:SetChecked(getglobal(this:GetName().."_GETSTATE")());</OnShow>
+			<OnEnter>GameTooltip:SetOwner(this, "ANCHOR_BOTTOMLEFT");
+GameTooltip:SetText(getglobal(this:GetName().."_TOOLTIP"));</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+			<OnClick>getglobal(this:GetName().."_UPDATE")(this:GetChecked());</OnClick>
+		</Scripts>
+	</CheckButton>
+	<Slider name="AUTOPOTION_TEMPLATE_SLIDER_PERCENTAGE" orientation="HORIZONTAL" virtual="true" enableMouse="true" minValue="0" maxValue="100" valueStep="1">
+		<Size>
+			<AbsDimension x="128" y="17"/>
+		</Size>
+		<HitRectInsets>
+			<AbsInset left="0" right="0" top="-10" bottom="-10"/>
+		</HitRectInsets>
+		<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="8"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="8"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="6" bottom="6"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" inherits="GameFontNormalSmall" text="">
+					<Anchors>
+						<Anchor point="BOTTOM" relativePoint="TOP"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLow" inherits="GameFontHighlightSmall" text="0">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="2" y="3"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHigh" inherits="GameFontHighlightSmall" text="100">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="-2" y="3"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentVal" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor relativePoint="BOTTOM" point="TOP"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow>getglobal(this:GetName().."Text"):SetText(getglobal(this:GetName().."_LABEL"));
+this:SetValue(getglobal(this:GetName().."_GETSTATE")());</OnShow>
+			<OnEnter>GameTooltip:SetOwner(this, "ANCHOR_BOTTOMLEFT");
+GameTooltip:SetText(getglobal(this:GetName().."_TOOLTIP"));</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+			<OnValueChanged>getglobal(this:GetName().."Val"):SetText(this:GetValue().."%");
+getglobal(this:GetName().."_UPDATE")(this:GetValue());</OnValueChanged>
+		</Scripts>
+		<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+			<Size>
+				<AbsDimension x="32" y="32"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+	<Slider name="AUTOPOTION_TEMPLATE_SLIDER_SECONDS" orientation="HORIZONTAL" virtual="true" enableMouse="true" minValue="0" maxValue="300" valueStep="1">
+		<Size>
+			<AbsDimension x="128" y="17"/>
+		</Size>
+		<HitRectInsets>
+			<AbsInset left="0" right="0" top="-10" bottom="-10"/>
+		</HitRectInsets>
+		<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="8"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="8"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="6" bottom="6"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" inherits="GameFontNormalSmall" text="">
+					<Anchors>
+						<Anchor point="BOTTOM" relativePoint="TOP"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLow" inherits="GameFontHighlightSmall" text="0">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="2" y="3"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHigh" inherits="GameFontHighlightSmall" text="100">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="-2" y="3"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentVal" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor relativePoint="BOTTOM" point="TOP"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow>getglobal(this:GetName().."Text"):SetText(getglobal(this:GetName().."_LABEL"));
+this:SetValue(getglobal(this:GetName().."_GETSTATE")());</OnShow>
+			<OnEnter>GameTooltip:SetOwner(this, "ANCHOR_BOTTOMLEFT");
+GameTooltip:SetText(getglobal(this:GetName().."_TOOLTIP"));</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+			<OnValueChanged>getglobal(this:GetName().."Val"):SetText(this:GetValue()..AUTOPOTION_COOLDOWN_TIME_INCREMENT);
+getglobal(this:GetName().."_UPDATE")(this:GetValue());</OnValueChanged>
+		</Scripts>
+		<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+			<Size>
+				<AbsDimension x="32" y="32"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+	<Button name="AUTOPOTION_TEMPLATE_BUTTON" virtual="true">
+		<Size>
+			<AbsDimension x="96" y="32"/>
+		</Size>
+		<Scripts>
+			<OnShow>this:SetText(getglobal(this:GetName().."_LABEL"));</OnShow>
+			<OnClick>getglobal(this:GetName().."_UPDATE")();</OnClick>
+			<OnEnter>GameTooltip:SetOwner(getglobal(this:GetName()), "ANCHOR_BOTTOMLEFT");
+GameTooltip:SetText(getglobal(this:GetName().."_TOOLTIP"));</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+		<NormalTexture inherits="DialogButtonNormalTexture"/>
+		<PushedTexture inherits="DialogButtonPushedTexture"/>
+		<HighlightTexture inherits="DialogButtonHighlightTexture"/>
+		<NormalText inherits="DialogButtonNormalText"/>
+		<HighlightText inherits="DialogButtonHighlightText"/>
+	</Button>
+	<!--Config Dialog frame-->
+	<Frame name="AutoPotion_ConfigDg" inherits="AutoPotion_Template_Dialog" hidden="true" parent="UIParent" toplevel="true">
+		<Size>
+			<AbsDimension x="384" y="468"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameFontNormal" text="Jooky's AutoPotion">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameFontNormalSmall" name="$parentVersionText" text="">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-16" y="-16"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<CheckButton name="AUTOPOTION_AP_ENABLED_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT" parent="AutoPotion_ConfigDg">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="24" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_AP_DISABLEFORDUELS_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT" parent="AutoPotion_ConfigDg">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_AP_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="-28"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_REVERSEORDER_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT" parent="AutoPotion_ConfigDg">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_AP_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="160" y="-28"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<Frame name="AUTOPOTION_LANGUAGE_MENU" inherits="UIDropDownMenuTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-28"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+								--UIDropDownMenu_Initialize(this,getglobal(this:GetName().."_INIT"));
+								UIDropDownMenu_SetWidth(50);
+								UIDropDownMenu_SetButtonWidth(24);
+								UIDropDownMenu_JustifyText("LEFT",this);
+							</OnLoad>
+					<OnShow>
+								UIDropDownMenu_Initialize(this,getglobal(this:GetName().."_INIT"));
+								--UIDropDownMenu_SetSelectedID(this,AutoBar_Config_Tab2_PDSetFrameIdx);
+							</OnShow>
+				</Scripts>
+			</Frame>
+			<Slider name="AUTOPOTION_HEALTHTRIGGER_SLIDER" inherits="AUTOPOTION_TEMPLATE_SLIDER_PERCENTAGE">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_AP_ENABLED_CHECKBT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="24" y="-48"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+			<Slider name="AUTOPOTION_MANATRIGGER_SLIDER" inherits="AUTOPOTION_TEMPLATE_SLIDER_PERCENTAGE">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_HEALTHTRIGGER_SLIDER" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="36" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+			<Frame name="AutoPotion_Thresholds_WidgetGroup" hidden="false">
+				<Size>
+					<AbsDimension x="352" y="64"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AUTOPOTION_HEALTHTRIGGER_SLIDER" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+			</Frame>
+			<CheckButton name="AUTOPOTION_STONES_ENABLED_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_HEALTHTRIGGER_SLIDER" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="-12" y="-38"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_CRYSTALS_ENABLED_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_STONES_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="164" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_SOULSTONES_ENABLED_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_STONES_ENABLED_CHECKBT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<Frame name="AutoPotion_Stones_WidgetGroup" hidden="false">
+				<Size>
+					<AbsDimension x="352" y="80"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_STONES_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-20" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+			</Frame>
+			<CheckButton name="AUTOPOTION_REJUVENATION_ENABLED_CHECKBT" text="Enable Rejuv Potions" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_STONES_ENABLED_CHECKBT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-56"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>this:SetText(getglobal(this:GetName().."_LABEL"));
+this:SetChecked(getglobal(this:GetName().."_GETSTATE")());
+if (this:GetChecked()) then
+	AUTOPOTION_SMARTREJUV_ENABLED_CHECKBT:Show();
+else
+	AUTOPOTION_SMARTREJUV_ENABLED_CHECKBT:Hide();
+end</OnShow>
+					<OnClick>getglobal(this:GetName().."_UPDATE")(this:GetChecked());
+if (this:GetChecked()) then
+	AUTOPOTION_SMARTREJUV_ENABLED_CHECKBT:Show();
+else
+	AUTOPOTION_SMARTREJUV_ENABLED_CHECKBT:Hide();
+end</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_SMARTREJUV_ENABLED_CHECKBT" text="Enable Smart Rejuv" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_REJUVENATION_ENABLED_CHECKBT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="8" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_HEALTHPOTIONS_ENABLED_CHECKBT" text="Enable Health Potions" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_REJUVENATION_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="164" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_MANAPOTIONS_ENABLED_CHECKBT" text="Enable Mana Potions" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_HEALTHPOTIONS_ENABLED_CHECKBT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<Frame name="AutoPotion_Potions_WidgetGroup" hidden="false">
+				<Size>
+					<AbsDimension x="352" y="80"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_REJUVENATION_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-20" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+			</Frame>
+			<CheckButton name="AUTOPOTION_BANDAGES_ENABLED_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Scripts>
+					<OnShow>this:SetText(getglobal(this:GetName().."_LABEL"));
+this:SetChecked(getglobal(this:GetName().."_GETSTATE")());
+if (this:GetChecked()) then
+	AUTOPOTION_COMBATBANDAGES_ENABLED_CHECKBT:Show();
+	AUTOPOTION_DOTBANDAGES_ENABLED_CHECKBT:Show();
+else
+	AUTOPOTION_COMBATBANDAGES_ENABLED_CHECKBT:Hide();
+	AUTOPOTION_DOTBANDAGES_ENABLED_CHECKBT:Hide();
+end</OnShow>
+					<OnClick>getglobal(this:GetName().."_UPDATE")(this:GetChecked());
+if (this:GetChecked()) then
+	AUTOPOTION_COMBATBANDAGES_ENABLED_CHECKBT:Show();
+	AUTOPOTION_DOTBANDAGES_ENABLED_CHECKBT:Show();
+else
+	AUTOPOTION_COMBATBANDAGES_ENABLED_CHECKBT:Hide();
+	AUTOPOTION_DOTBANDAGES_ENABLED_CHECKBT:Hide();
+end</OnClick>
+				</Scripts>
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_REJUVENATION_ENABLED_CHECKBT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-56"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_COMBATBANDAGES_ENABLED_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_BANDAGES_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="-28"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="AUTOPOTION_DOTBANDAGES_ENABLED_CHECKBT" inherits="AUTOPOTION_TEMPLATE_CHECKBT">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_BANDAGES_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="160" y="-28"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<Frame name="AutoPotion_Bandages_WidgetGroup" hidden="false">
+				<Size>
+					<AbsDimension x="352" y="72"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AUTOPOTION_BANDAGES_ENABLED_CHECKBT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-20" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+			</Frame>
+			<Button name="AUTOPOTION_CLOSE_BUTTON" inherits="AUTOPOTION_TEMPLATE_BUTTON">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-16" y="16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="AUTOPOTION_DEFAULTS_BUTTON" inherits="AUTOPOTION_TEMPLATE_BUTTON">
+				<Size>
+					<AbsDimension x="118" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="16" y="16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="AUTOPOTION_SAVE_DEFAULTS_BUTTON" inherits="AUTOPOTION_TEMPLATE_BUTTON">
+				<Size>
+					<AbsDimension x="132" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="11" y="16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>getglobal(this:GetName().."VersionText"):SetText(AUTOPOTION_UI_VERSION_LABEL);</OnShow>
+		</Scripts>
+	</Frame>
+	<!-- Frame to handle all core events -->
+	<GameTooltip name="AutoPotion_Tooltip" frameStrata="LOW" toplevel="true" movable="true" parent="UIParent" inherits="GameTooltipTemplate"/>
+	<Frame name="AutoPotion_Main">
+		<Scripts>
+			<OnLoad>AutoPotion_OnLoad();</OnLoad>
+			<OnEvent>AutoPotion_OnEvent(event);</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

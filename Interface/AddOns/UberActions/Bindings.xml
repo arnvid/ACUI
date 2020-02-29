@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="UBERACTIONS_CONFIG" header="UBERACTIONS_SEP"> 
+		UberActions_ConfigEdit(); 
+	</Binding>
+</Bindings>

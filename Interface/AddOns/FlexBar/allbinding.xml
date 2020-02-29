@@ -1,0 +1,405 @@
+	<Frame name="raid1MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeto="UIParent" relativepoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid2MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid1MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid3MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid2MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid4MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid3MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid5MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid4MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid6MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeto="UIParent" relativepoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="-165"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid7MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid6MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid8MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid7MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid9MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid8MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid10MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid9MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid11MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeto="UIParent" relativepoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="-330"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid12MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid11MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid13MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid12MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid14MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid13MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid15MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid14MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid16MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeto="UIParent" relativepoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="-495"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid17MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid16MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid18MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid17MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid19MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid18MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid20MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid19MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid21MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeto="UIParent" relativepoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid22MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid21MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid23MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid22MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid24MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid23MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid25MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid24MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid26MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeto="UIParent" relativepoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="-165"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid27MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid26MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid28MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid27MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid29MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid28MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid30MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid29MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid31MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeto="UIParent" relativepoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="-330"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid32MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid31MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid33MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid32MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid34MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid33MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid35MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid34MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid36MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeto="UIParent" relativepoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="-495"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid37MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid36MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid38MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid37MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid39MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid38MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="raid40MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="raid39MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="playerMiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="BOTTOM" relativeto="UIParent" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="160"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="party1MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="playerMiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="party2MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="party1MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="party3MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="party2MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<Frame name="party4MiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="TOP" relativeto="party3MiniBar" relativepoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="2"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>

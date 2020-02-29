@@ -1,0 +1,10 @@
+## Interface: 1300
+## Title: BibToolbars
+## Notes: Part of BibMod 3
+## Author: Ian Bibby
+## Dependencies: BibCore
+## OptionalDeps:
+BibActionButtons.xml
+BibActionBar.xml
+BibReplaceXPBar.xml
+BibActionBarControls.xml

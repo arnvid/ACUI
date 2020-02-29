@@ -1,0 +1,64 @@
+myReloadUI v1.1
+
+
+Description
+===========
+
+myReloadUI est un AddOn pour World of Warcraft. Il ajoute un bouton ReloadUI
+au Menu Principal. En cliquant dessus, vous lancez la fonction ReloadUI().
+
+
+Installation
+============
+
+Extraire les fichiers dans votre répertoire World of Warcraft.
+
+
+Caractéristiques
+================
+
+* Cliquer pour lancer ReloadUI()
+
+* Compatibilité avec le client de World of Warcraft v1.3.1 (Interface 1300)
+* TRES Très faible utilisation de la mémoire (<0.01MB)
+
+* Support de myAddOns v1.2
+
+
+Utilisation
+===========
+
+Il n'y a pas de commande displonible. Il suffit de cliquer!
+
+Si vous utilisez l'AddOn myAddOns, myReloadUI apparaîtra dans la catégorie "Autres".
+
+
+Problèmes connus
+================
+
+* L'AddOn MoveAnything utilise le même emplacement pour son bouton. Le bouton de MoveAnything's
+et celui de myReloadUI chevauchent. Voici une solution de contournement:
+
+	Dans myGameMenuButtonReloadUI.xml, à la ligne 10, changer "GameMenuButtonMacros" en
+	"GameMenuButtonMoveAnything"
+
+
+Versions
+========
+
+1.1 - 8 Mars 2005
+
+* Correction de la largeur du Menu Principal
+* Mise à jour du support de myAddOns
+
+1.0 - 4 Février 2005
+
+* Première version disponible
+
+
+Contact
+=======
+
+Auteur : Scheid (scheid@free.fr)
+Site web : http://scheid.free.fr
+

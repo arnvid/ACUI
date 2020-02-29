@@ -1,0 +1,31 @@
+<!--
+	myReloadUI v1.1
+-->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="localization.lua"/>
+	<Script file="myGameMenuButtonReloadUI.lua"/>
+	<Button name="myGameMenuButtonReloadUI" inherits="GameMenuButtonTemplate" text="ReloadUI" parent="GameMenuFrame">
+		<Anchors>
+			<Anchor point="TOP" relativeTo="GameMenuButtonMacros" relativePoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="0" y="-1"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + this:GetHeight());
+				GameMenuButtonLogout:SetPoint("TOP", this:GetName(), "BOTTOM", 0, -1);
+				myGameMenuButtonReloadUI_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				myGameMenuButtonReloadUI_OnEvent();
+			</OnEvent>
+			<OnClick>
+				PlaySound("igMainMenuOption");
+				ReloadUI();
+			</OnClick>
+		</Scripts>
+	</Button>
+</Ui>

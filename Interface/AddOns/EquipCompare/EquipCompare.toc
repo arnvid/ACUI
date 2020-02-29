@@ -1,0 +1,11 @@
+## Interface: 1300
+## Title: EquipCompare
+## Title-frFR: EquipCompare (en français)
+## Title-deDE: EquipCompare (auf deutsch)
+## Author: Legorol
+## Notes: Compare items easily with ones you have equipped (2.6.2)
+## Notes-frFR: Permet de comparer facilement les items avec ceux que vous équipez (2.6.2)
+## Notes-deDE: Vergleiche Gegenstände ganz einfach mit deiner Ausrüstung (2.6.2)
+## SavedVariables: EquipCompare_Enabled, EquipCompare_ControlMode
+## OptionalDeps: Cosmos
+EquipCompare.xml

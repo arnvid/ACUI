@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Ezarra's Extended ZoneLevel Read Me</title><style type="text/css" media="all">
+	
+
+<!--
+	h1
+	{
+		color: #993;
+		font: bold 200% "Courier New", Courier, monospace;
+	}
+	
+	.section
+	{
+		background: #FFFFCC;
+		padding: 1em;
+		border: 1px solid;
+		margin-bottom: -1px;
+	}
+	
+	.subs { background: #ffff99; }
+	
+	h2
+	{
+		font: bold 80% Helvetica, sans-serif;
+		text-transform: uppercase;
+		text-align: center;
+		background: yellow;
+		margin: 0px;
+		border: 2px solid;
+	}
+	
+	h3 { font: italic small Georgia, Times, serif; }
+	
+	body
+	{
+		margin-right: auto;
+		margin-left: auto;
+		font: 10pt Verdana, Arial, Helvetica, sans-serif;
+		line-height: 1.5em;
+		width: 600px;
+	}
+-->
+
+
+</style> 
+</head>
+<body>
+<h1>EZoneLevel from Ezarra</h1> 
+<p>
+	An extension to <a href="http://www.curse-gaming.com/mod.php?addid=321">ZoneLevel</a> that includes sub-zones, a tooltip window, nifty icons, and messages to the ChatWindow 
+</p>
+<div class="section">
+	<h2>Features</h2> 
+	<div class="subs">
+		<h3>ToolTip Window</h3> 
+		<ul>
+			<li>
+				<img src="TTsmall.jpg" alt="ToolTip" /> 
+			</li>
+			<li>
+				Support for SubSZones 
+			</li>
+			<li>
+				Text in chat and ToolTip is colored to match threat level 
+			</li>
+			<li>
+				Notification for unknown Zones 
+			</li>
+			<li>
+				Intelligent 'popping' to show Zone info if current subzone is unknown 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>ChatSpam</h3> 
+		<ul>
+			<li>
+				Show zone info in chat window for all unknown zones 
+			</li>
+			<li>
+				Show zone info in chat window for all known zones 
+			</li>
+			<li>
+				Dont' Show zone in chat window 
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="section">
+	<h2>Credits and Thanks</h2> 
+	<div class="subs">
+		<ul>
+			<li>
+				Credit to <a href="http://www.curse-gaming.com/mod.php?addid=321">ZoneLevel</a> and <a href="http://www.curse-gaming.com/mod.php?addid=390">InTheZone</a> for inspiration. 
+			</li>
+			<li>
+				<a href="http://forums.curse-gaming.com/member.php?u=841">newtonma</a> for the excellent icons 
+			</li>
+			<li>
+				Everyone who's ever written a mod, regardess of how lame (or cool) 
+			</li>
+			<li>
+				EtherealMoon for not playing much <img src="biggrin.gif" alt=":D" width="15" height="15" /> 
+			</li>
+			<li>
+				<a href="http://www.covisp.net">Covisp.net</a> for hosting my email 
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="section">
+	<h2>Change Log</h2> 
+	<div class="subs">
+		<h3>1.0.8</h3> 
+		<ul>
+			<li>
+				Added support for <a href="http://www.curse-gaming.com/mod.php?addid=358">MyAddons</a> 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.7</h3> 
+		<ul>
+			<li>
+				Added EZoneLevel.html readme file
+			</li>
+			<li>
+			     Interface version 1300 (22-03-05 update)
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.6</h3> 
+		<ul>
+			<li>
+				Added status and toggle commands 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.5</h3> 
+		<ul>
+			<li>
+				Fixed nil concatenation bug 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.4</h3> 
+		<ul>
+			<li>
+				Towns and cities that do not have their own maps now show the zone for the zone they are in 
+			</li>
+			<li>
+				Messages in the Chat spam should not repeat, even if moving from one onknown suzone to the zone and then to another unknown subzone, only the first message will be displayed. 
+			</li>
+			<li>
+				Color definitions are centralized for easier customization 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.3a</h3> 
+		<ul>
+			<li>
+				Added Stranglethorn Vale 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.3</h3> 
+		<ul>
+			<li>
+				Update for current WOW (4216) 
+			</li>
+			<li>
+				<span style="font-weight: bolder; font-variant: small-caps;">New icons by newtonma</span> 
+			</li>
+			<li>
+				no longer spams unknown areas when set to off 
+			</li>
+			<li>
+				*CHANGE* only spams unknown when set to unknown, only known areas are spammed when set to "on" 
+			</li>
+			<li>
+				1.0.3 Variables renamed to avoid conflicts with ZoneLevel (but really, use one or the other) 
+			</li>
+			<li>
+				1.03 Some minor code changes to make the LUA slightly smaller 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.2</h3> 
+		<ul>
+			<li>
+				A couple of bug fixes 
+			</li>
+			<li>
+				No longer thinks the main zone is unknown 
+			</li>
+			<li>
+				Added commands to disable the Chat window spam (toggle on, off, unknown) 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0.1</h3> 
+		<ul>
+			<li>
+				Minor bug fix (no longer shows empty ``Levels for "" unknown`` message) 
+			</li>
+			<li>
+				Added some Instances to the list of areas 
+			</li>
+		</ul>
+	</div>
+	<div class="subs">
+		<h3>1.0</h3> 
+		<ul>
+			<li>
+				1.0 Initial Release 
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="section">
+	<h2>Contact</h2> 
+	<div class="subs">
+		<ul>
+			<li>
+				Character: Ezarra on EarthenRing 
+			</li>
+			<li>
+				Email: <a href="mailto:ezarra@covisp.net">Ezarra</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

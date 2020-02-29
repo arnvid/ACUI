@@ -1,0 +1,190 @@
+myAddOns v1.2
+
+
+Description
+===========
+
+myAddOns est un AddOn pour World of Warcraft. Il ajoute un menu AddOns au Menu
+Principal. Ce menu liste par categorie tous les AddOns supportant myAddOns chargés
+ou non. Vous pouvez vérifier quels AddOns vous utilisez et leur version. Si les
+AddOns ont des fenêtres d'options, vous pouvez les ouvrir à partir de ce menu.
+
+
+Installation
+============
+
+Extraire les fichiers dans votre répertoire World of Warcraft.
+
+
+Caractéristiques
+================
+
+* Liste des AddOns supportant myAddOns (nom, version et catégorie)
+* Lien vers les fenêtres d'options des AddOns
+* Localisation (allemand, anglais, français)
+
+* Compatibilité avec le client de World of Warcraft v1.3.0 (Interface 1300)
+* Très faible utilisation de la mémoire (~0.07MB)
+
+
+Utilisation
+===========
+
+- Joueurs -
+
+Pour accéder au menu AddOns, cliquez sur le bouton AddOns dans le Menu Principal.
+Tous les AddOns supportant myAddOns que vous avez chargés en même temps que myAddOns
+sont listés par catégorie.
+
+Bouton "Retirer": Vous pouvez retirer un AddOn de la liste avec le bouton "Retirer"
+mais cela ne le désinstalle pas. Si vous le chargez une nouvelle fois, il réapparaîtra
+dans la liste.
+
+Bouton "Options": Vous pouvez ouvrir la fenêtre d'options d'un AddOn en cliquant sur
+le bouton "Options" si l'AddOn sélectionné en a une.
+
+- Développeurs -
+
+Voici un petit guide pour ajouter le support de myAddOns à vos AddOns. Pour l'illustrer,
+je vais prendre l'exemple de l'AddOn HelloWorld.
+
+Les étapes 1 et 2 sont obligatoires pour lister votre AddOn dans le menu.
+Les étapes 3 à 5 sont facultatives, elles permettent d'ajouter un lien vers votre
+fenêtre d'options.
+
+
+Etape 1 - Obligatoire
+Premièrement, vous devez ajouter une dépendance facultative à myAddOns. Pour cela,
+ajoutez la ligne suivane à votre fichier .toc:
+
+	## OptionalDeps: myAddOns
+
+Etape 2 - Obligatoire
+Ensuite, récupérez l'évènement "VARIABLES_LOADED" et enregistrez votre AddOn dans
+la variable globale myAddOnsList. Pour cela, ajoutez les lignes suivantes à votre
+fonction gérant l'évènement OnEvent, pour l'évènement "VARIABLES_LOADED":
+
+	-- Add HelloWorld to myAddOns addons list
+	if(myAddOnsFrame) then
+		myAddOnsList.HelloWorld = {name = "HelloWorld", description = "The almighty Hello World example", version = "1.0", category = MYADDONS_CATEGORY_OTHERS, frame = "HelloWorldFrame"};
+	end
+
+myAddOnsList est la liste d'AddOns dans myAddOns. Les champs suivants sont utilisés:
+
+	- name est le nom de votre AddOn dans le menu (Texte libre - Obligatoire)
+	- description est la description de votre AddOn dans le menu (Texte libre - Facultatif)
+	- version est la version de votre AddOn dans le menu (Texte libre - Facultatif)
+	- category est la categorie de votre AddOn dans le menu (Texte - Facultatif)
+	- frame est la fenêtre de votre AddOn (Frame - Obligatoire)
+	- optionsframe est la fenêtre d'options de votre AddOn (Frame - Facultatif)
+
+Vous devez utiliser une des variables globales suivantes pour renseigner le champ category.
+Elles sont localisées:
+
+	- MYADDONS_CATEGORY_BARS
+	- MYADDONS_CATEGORY_CHAT
+	- MYADDONS_CATEGORY_CLASS
+	- MYADDONS_CATEGORY_COMBAT
+	- MYADDONS_CATEGORY_COMPILATIONS
+	- MYADDONS_CATEGORY_GUILD
+	- MYADDONS_CATEGORY_INVENTORY
+	- MYADDONS_CATEGORY_MAP
+	- MYADDONS_CATEGORY_OTHERS
+	- MYADDONS_CATEGORY_PROFESSIONS
+	- MYADDONS_CATEGORY_QUESTS
+	- MYADDONS_CATEGORY_RAID
+
+Si vous n'utilisez pas l'une de ces variable, votre AddOn sera listé dans la catégorie "Autres".
+
+Le champ frame est utilisé pour détexter si votre AddOn est chargé. Le champ optionsframe est
+utilisé pour détexter si votre AddOn a une fenêtre d'options et pour faire un lien vers elle
+(voir étapes 3 à 5).
+
+Et voila! Maintenant votre AddOn sera listé.
+
+Etape 3 - Facultative
+Pour ajouter un lien vers votre fenêtre d'options, renseignez le champs optionsframe:
+
+	myAddOnsList.HelloWorld = {name = "HelloWorld", description = "The almighty Hello World example", version = "1.0", category = MYADDONS_CATEGORY_OTHERS, frame = "HelloWorldFrame", optionsframe = "HelloWorldOptionsFrame"};
+
+Etape 4 - Facultative
+Pour afficher correctement votre fenêtre d'options, ajoutez une ligne à UIPanelWindows.
+Pour cela, ajoutez la ligne suivante à votre fonction OnLoad:
+
+	-- Add HelloWorldOptionsFrame to the UIPanelWindows list
+	UIPanelWindows["HelloWorldOptionsFrame"] = {area = "center", pushable = 0};
+
+Etape 5 - Facultative
+Utilisez les fonction ShowUIPanel et HideUIPanel pour afficher et cacher votre fenêtre d'options.
+Quand vous cachez votre fenêtre d'options, vérifiez la variable globale MYADDONS_ACTIVE_OPTIONSFRAME.
+Si MYADDONS_ACTIVE_OPTIONSFRAME est votre fenêtre d'options, vous savez que votre fenêtre d'options a
+été ouverte par le menu de myAddOns. Pour retourner au menu de myAddOns, ajoutez les lignes suivantes
+à votre function gérant l'évènement OnHide:
+
+	-- Check if the options frame was opened by myAddOns
+	if (MYADDONS_ACTIVE_OPTIONSFRAME == this) then
+		ShowUIPanel(myAddOnsFrame);
+	end
+
+Maintenant vous êtes prêt. Vous pouvez télécharger mon exemple HelloWorld pour tester tout cela.
+Allez voir myClock ou myReloadUI aussi, ils supportent tous les deux myAddOns.
+
+
+FAQ
+===
+
+Q: Mes AddOns ne sont pas listés Pourquoi??
+
+A: La liste des AddOns n'est pas crées automatiquement. Chaque AddOn doit s'enregistrer
+dans la liste. Les auteurs d'AddOn doivent donc ajouter quelques lignes à leur code (voir
+Utilisation pour les Développeurs). Vérifiez que vos AddOns supportent myAddOns.
+
+Q: Pourquoi la liste d'AddOn n'est-elle pas crée automatiquement?
+
+A: Parce que les fonctions nécessaires ne sont pas disponible pendant le jeu. Elles ne le
+sont que lors de la Connection/choix du personnage mais pas en jouant. Ces fonctions sont:
+parcours du répertoire AddOns, lecture des fichier .toc, activation/désactivation d'AddOn,
+etc... Blizzard n'autorise pas ces fonctions dans le jeu pour des raisons de sécurité (pas
+d'entrée/sortie dynamique).
+
+Q: Si je retire un AddOn de la liste, est-il désactivé? Puis-je activer/désactiver un AddOn
+dans le jeu?
+
+A: Si vous retirez un AddOn, il n'est plus listé, mais il est toujours actif jusqu'à ce que
+vous quittiez le jeu et le désactiviez. Il réapparaîtra dans la liste si vous ne le désactivez
+pas la prochaine fois que vous vous connectez. Vous ne pouvez pas activez/désactiver un AddOn
+pendant le jeu (voir la réponse précédente).
+
+
+Problèmes connus
+================
+
+* Aucun
+
+
+Versions
+========
+
+1.2 - 25 Mars 2005
+
+* Correction de l'affichage de la surbrillance
+* Ajout de la catégorie "Guilde"
+
+1.1 - 8 Mars 2005
+
+* Correction de la largeur du Menu Principal
+* Correction de l'affichage pour les fenêtre d'options dans une zone autre que "center"
+* Ajout des catégories
+* Suppression des commandes
+
+1.0 - 4 Février 2005
+
+* Première version disponible
+
+
+Contact
+=======
+
+Auteur : Scheid (scheid@free.fr)
+Site web : http://scheid.free.fr
+

@@ -1,0 +1,66 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+   <Script file="AvgXP.lua"/>
+   <Frame name="AvgXP" frameStrata="BACKGROUND" toplevel="true" enableMouse="true" movable="true" parent="UIParent">
+      <Size>
+         <AbsDimension x="475" y="24"/>
+      </Size>
+      <Anchors>
+         <Anchor point="CENTER"/>
+      </Anchors>
+      <TitleRegion setAllPoints="true"/>
+	<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+		</Backdrop>
+      <Frames>
+         <Button name="AvgXPButton">
+            <Size>
+               <AbsDimension x="100" y="12"/>
+            </Size>
+            <Anchors>
+               <Anchor point="CENTER">
+                  <Offset>
+                     <AbsDimension x="0" y="0"/>
+                  </Offset>
+               </Anchor>
+            </Anchors>
+            <Layers>
+               <Layer level="BACKGROUND">
+                  <FontString name="AvgXPText" inherits="GameFontNormalSmall" wraponspaces="true">
+                     <Anchors>
+                        <Anchor point="CENTER">
+                           <Offset>
+                              <AbsDimension x="0" y="1"/>
+                           </Offset>
+                        </Anchor>
+                     </Anchors>
+                  </FontString>
+               </Layer>
+            </Layers>
+         </Button>
+      </Frames>
+      <Scripts>
+         <OnLoad>
+            JX_AvgXP_Initialize()
+         </OnLoad>
+         <OnEvent>
+            JX_AvgXP_Calc(event)
+         </OnEvent>
+ 	 <OnEnter>
+	    JX_AvgXP_SetTooltip();
+	 </OnEnter>
+	 <OnLeave>
+	    GameTooltip:Hide();
+	 </OnLeave>
+   </Scripts>
+   </Frame>
+   <GameTooltip name="AvgXPTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true"/>
+</Ui>

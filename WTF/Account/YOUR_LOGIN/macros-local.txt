@@ -1,0 +1,25 @@
+MACRO 1 "Chicken" Ability_CheapShot.blp
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+/chicken
+END
+MACRO 2 "Roll" Spell_Holy_FistOfJustice.blp
+/roll
+END
+MACRO 3 "Assist" Spell_Nature_NaturesBlessing.blp
+/assist
+END
+MACRO 4 "R_ui" Spell_Shadow_Teleport.blp
+/console reloadui
+END

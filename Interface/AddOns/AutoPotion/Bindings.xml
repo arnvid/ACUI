@@ -1,0 +1,4 @@
+<Bindings>
+	<Binding name="AUTOPOTION_BINDING" header="AUTOPOTION_HEADER">AutoPotion_SlashCmd();</Binding>
+	<Binding name="AUTOPOTION_TOGGLE" header="AUTOPOTION_HEADER">AutoPotion_SlashCmd(AUTOPOTION_TOGGLE_COMMAND);</Binding>
+</Bindings>

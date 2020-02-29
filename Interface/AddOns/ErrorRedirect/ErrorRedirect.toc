@@ -1,0 +1,11 @@
+## Interface: 1300
+## Title: Error Redirect
+## Title-deDE: Umleitung Fehlernachricht
+## Notes: Will Redirect some of this big red messages into the combat log. So your screen keeps clear for the real important messages.
+## Notes-deDE: Leitet einige der großen roten Fehlermeldungen in das Kampflog um. Der Bildschirm bleibt frei für die wirklich wichtigen Nachrichten.
+## Author: Bastian Pflieger <wb@illogical.de>
+## OptionalDeps: myAddOns
+## Dependencies:
+## SavedVariables: ErrorRedirect_IsEnabled ErrorRedirect_ShowInCombatLog ErrorRedirect_HighlightMessages ErrorRedirect_SuppressModErrors
+ErrorRedirect.xml
+ErrorRedirectOptions.xml

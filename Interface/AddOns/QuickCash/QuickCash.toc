@@ -1,0 +1,6 @@
+## Interface: 4216
+## Title: Quick Cash
+## Notes: A tiny functioning cash display
+## OptionalDeps:
+## Dependencies:
+QuickCash.xml

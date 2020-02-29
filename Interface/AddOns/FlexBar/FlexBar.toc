@@ -1,0 +1,7 @@
+## Interface: 1300
+## SavedVariables: FBSavedProfile, FBFirstUse, FBScripts, FBTextChunks, FBToggles, FBBuffs, FBCombatTypes
+## Title: FlexBar 1.38 by Mairelon
+## Notes: 96 incredibly versatile buttons
+## OptionalDeps: TitanModMenu
+FlexBar.xml
+FlexBar_GUI.xml

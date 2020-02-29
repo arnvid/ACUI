@@ -1,0 +1,6 @@
+## Interface: 1300
+## Title: Jooky's AutoPotion
+## Notes: Version 2.2 - Automatically uses an item to replenish your health or mana when they drop below a certain percentage.
+## SavedVariables: AP_Player_Config, AP_User_Defaults, AP_Lang
+AutoPotion.xml
+## OptionalDeps: myAddOns

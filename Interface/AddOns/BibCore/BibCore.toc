@@ -1,0 +1,6 @@
+## Interface: 1300
+## Title: BibCore
+## Notes: Core required by BibMod
+## Author: Ian Bibby
+## OptionalDeps:
+BibCore.xml

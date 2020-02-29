@@ -1,0 +1,9 @@
+	<Frame name="%sMiniBar" inherits="MiniBarTemplate" hidden="true">
+		<Anchors>
+			<Anchor point="%s" relativeto="%s" relativepoint="%s">
+				<Offset>
+					<AbsDimension x="%d" y="%d"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	</Frame>
